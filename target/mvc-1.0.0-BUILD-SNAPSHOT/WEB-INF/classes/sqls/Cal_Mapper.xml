@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cal">
+
+<resultMap type="com.lol.hgl.dto.calDto" id="CalDtoMap">
+		<result column="MEMBERID" property="memberId"/>
+		<result column="CALNO" property="calNo"/>
+		<result column="CALTITLE" property="calTitle"/>
+		<result column="CALSCH" property="calSch"/>
+		<result column="CALDATE" property="calDate"/>
+		<result column="CALMEMO" property="calMemo"/>
+		<result column="CALSMS" property="calSMS"/>
+		<result column="MEMBERNICKNAME" property="memberNickname"/>
+	</resultMap>
+	
+	<!-- <insert id="insert" parameterType="CalDto" >
+		INSERT INTO CAL
+		VALUES(#{memberId},CALNO_SEQ.NEXTVAL,#{calTitle},#{calSch},SYSDATE,#{calMemo},#{calSMS})
+	</insert> -->
+	
+	<insert id="insert" parameterType="CalDto" >
+		INSERT INTO CAL
+		VALUES(#{memberId},CALNO_SEQ.NEXTVAL,#{calTitle},#{calSch},SYSDATE,#{calMemo},#{calSMS},#{memberNickname})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM CAL WHERE CALNO = #{calNo}
+	</delete>
+		
+	<update id="update">
+		UPDATE CAL
+		SET CALTITLE = #{calTitle}, CALMEMO = #{calMemo}, CALSCH = #{calSch}, CALDATE = SYSDATE, CALSMS = #{calSMS}
+		WHERE CALNO = #{calNo}
+	</update>
+	
+	<select id="selectAll" parameterType="map" resultMap="CalDtoMap">
+		SELECT *
+		FROM
+			(SELECT (ROW_NUMBER() OVER(PARTITION BY SUBSTR(CALSCH,1,8) ORDER BY CALSCH)) RN,CALNO,MEMBERID,CALTITLE,CALMEMO,CALSCH,CALDATE,CALSMS,MEMBERNICKNAME
+			FROM CAL
+			WHERE MEMBERID = #{memberId} AND SUBSTR(CALSCH,1,6)=#{yyyyMM})
+		WHERE RN BETWEEN 1 AND 3
+	</select>
+	
+	<select id="selectOne" parameterType="int" resultMap="CalDtoMap">
+		SELECT *
+		FROM CAL
+		WHERE CALNO = #{calNo}
+	</select>
+	
+	<select id="getCalViewCount" parameterType="map" resultType="int">
+		   SELECT COUNT(*)
+    	    FROM CAL
+      		WHERE MEMBERID=#{memberId} AND SUBSTR(CALSCH,1,8)=#{yyyyMMdd}
+	</select>
+	
+	<select id="getCalBoard" parameterType="int" resultMap="CalDtoMap">
+		SELECT *
+		FROM CAL
+		WHERE CALNO = #{calNo}
+	</select>
+	
+	<select id="birthList" resultMap="CalDtoMap">
+	SELECT * FROM CAL WHERE CALTITLE LIKE '%생신%' AND CALSMS='Y'
+	</select>
+	
+	<update id="updateCALSMS" parameterType="int" >
+	UPDATE CAL SET CALSMS='N' WHERE CALNO=#{calNo}
+	</update>
+	
+	<select id="calList" resultMap="CalDtoMap">
+	 SELECT * FROM CAL WHERE NOT CALTITLE LIKE '%생신%' AND CALSMS='Y'
+	</select>
+	
+	<select id="DayListCount" resultType="int" parameterType="CalDto">
+	SELECT COUNT(*) FROM CAL WHERE MEMBERID=#{memberId} AND CALSCH LIKE #{calSch}
+	</select>
+	
+</mapper>

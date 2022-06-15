@@ -1,0 +1,210 @@
+@charset "UTF-8";
+
+#container{
+   margin: auto;
+   width: 1280px;
+   height: 100%;
+}
+
+#a{
+width: 100%;
+}
+
+#c{
+width: 100%;
+}
+
+#b{
+color: white;
+height: 100%;
+width: 100%; 
+display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+}
+ 
+ #bodyMain{
+    position: relative;
+    width: 70%;
+    height: 95%;
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+     flex-direction: column;
+ }
+ 
+ #frm{
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+     flex-direction: column;
+    margin: auto;
+    width: 99.5%;
+ }
+ 
+ #content{
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+ }
+ 
+ #ggTitle{
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+     height: 30px;
+ }
+ 
+ th{
+    font-weight:bold;
+    font-size: 13pt;
+ }
+ 
+ td{
+    background-color: tomato;
+    height: 25px;
+    text-align: center;
+      border: 1px solid white;
+      text-decoration: none;
+ }
+ 
+ .td{
+    color: black;
+    height: 99%;
+    width: 99%;
+ }
+ 
+ textarea{
+    width: 99%;
+ }
+ 
+ table{
+ box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+  letter-spacing: 1px;
+  transition: all 150ms linear;
+    background-color: tomato;
+    width:98%;
+ }
+ 
+ #paging{
+ box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+  letter-spacing: 1px;
+  transition: all 150ms linear;
+    text-align: center;
+    width: 98%;
+    background-color: tomato;
+    border: 1px solid white;
+ }
+ 
+ #fileDiv{
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+     flex-direction: column;
+ }
+ #fileDiv1{
+ padding-top: 10px;
+ display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+     flex-direction: row;
+    width: 100%;
+    font-size: 12pt;
+ }
+ #fileDiv2{
+    width: 30%;
+ }
+ 
+ #addFile{
+    margin-left: 175px;
+ }
+ 
+ #boardName{
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+    text-align: center;
+    height: 30px;
+    width: 98%;
+    background-color: tomato;
+    border: 1px solid white;
+ }
+
+#btn002{
+   float: right;
+}
+#btn003{
+   float: right;
+}
+ a:link{
+    color: black;
+    text-decoration: none;
+ }
+ 
+ a:hover {
+    color: black;
+   text-decoration: none;
+}
+
+a:visited {
+    color: black;
+   text-decoration: none;
+}
+
+.btn-3 {
+   padding-bottom: 20px;
+   color: #fff;
+  cursor: pointer;
+   margin: 4px;
+   height: 25px;
+  background: tomato;
+  border: 1px solid #da251f;
+  box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+  letter-spacing: 1px;
+  transition: all 150ms linear;
+}
+
+.btn-3:hover {
+  background: tomato;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+  color: #ec817d;
+  text-shadow: 1px 1px 0 #c2211c;
+  transition: all 250ms linear;
+}
+
+.thDiv{
+   text-shadow: 1px 1px 0 black;
+}
+
+ #delBtn{
+    font-size: 10pt;
+ }
+ #filePadding{
+    font-size: 12pt;
+    padding-top: 5px;
+ }

@@ -1,0 +1,123 @@
+@charset "UTF-8";
+a{
+	text-decoration:none;
+	color:#669;
+}
+a:visited { 
+	color: #669; 
+	text-decoration: none;
+}
+a:link { 
+	color: #669; 
+	text-decoration: none;
+}
+#container{
+	height: 1024px;
+}
+#kindSearch{
+	width:360px;
+	text-align: left;
+	display: inline-block;
+}
+#kindTitle{
+	margin:auto;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	background: #f0f0ff;
+	width: 800px;
+	padding: 10px;
+	border: 3px solid #e8edff;
+	border-radius: 10px;
+}
+#icon{
+	position: absolute;
+	margin-left: -50px; 
+	margin-top: -10px;
+}
+#icon img{
+	width: 50%;
+	height: 50%;
+}
+
+#map{
+	margin:auto; 
+	margin-top: 2%;
+	width:780px;
+	height:350px;
+}
+
+#rounded-corner
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#rounded-corner th
+{
+	text-align: center;
+	padding: 8px;
+	font-weight: normal;
+	font-size: 13px;
+	color: #039;
+	background: #b9c9fe;
+}
+#rounded-corner td
+{
+	padding: 8px;
+	background: #e8edff;
+	border-top: 1px solid #fff;
+	color: #669;
+}
+#rounded-corner tfoot td.rounded-foot-left
+{
+	background: #e8edff url('botleft.png') left bottom no-repeat;
+}
+#rounded-corner tfoot td.rounded-foot-right
+{
+	background: #e8edff url('botright.png') right bottom no-repeat;
+}
+#rounded-corner tbody tr:hover td
+{
+	background: #d0dafd;
+}
+.memberDo{
+	  background: transparent;
+  text-align:center;
+  padding: .8em .5em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #b9c9fe;
+  border-radius: 5px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  font-weight: bold;
+  color:#b9c9fe;
+}
+.memberCity {
+  background: transparent;
+  text-align:center;
+  padding: .8em .5em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #b9c9fe;
+  border-radius: 5px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+  font-weight: bold;
+  color:#b9c9fe;
+  width: 180px;
+}
+
+select:hover{
+  background: #b9c9fe;
+  color: #ffffff;
+  font-weight: bold;
+}

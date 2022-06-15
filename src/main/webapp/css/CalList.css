@@ -1,0 +1,184 @@
+@charset "UTF-8";
+
+#calendar{
+		background-color: white;
+		border-collapse: collapse; 
+		border: 1px solid black; 
+	}
+	
+	#calendar th{
+		width: 80px; 
+		border: 1px solid gray;
+	}
+	
+	#calendar td{
+		width: 80px; 
+		height: 80px; 
+		border: 1px solid gray; 
+		text-align: left;
+		vertical-align: top;
+		position: relative;
+	}
+	
+	a{
+		text-decoration: none;
+	}
+	
+	.cList>p{
+		font-size: 7pt;
+		margin: 1px;
+		padding: 2px;
+		background-color: tomato;
+		color: white;
+	}
+	
+	.cPreview{
+		z-index: 5;
+		position: absolute;
+		top:-30px;
+		left:10px;
+		border: 2px solid tomato;
+		background-color: white;
+		width: 200px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		border-radius: 40px 40px 40px 1px;
+	}
+	
+	table{
+		background-color: white;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+    border: 1px solid white;
+	}
+	
+	table th{
+	text-shadow: 1px 1px 0 black;
+	}
+	
+	table td p{
+	text-shadow: 1px 1px 0 black;
+	}
+	
+	#b{
+		height: 100%;
+		display: -webkit-flex;
+	  display:         flex;
+	  -webkit-align-items: center;
+	          align-items: center;
+	  -webkit-justify-content: center;
+	          justify-content: center;
+	  flex-direction: column;
+	}
+	
+	#caption{
+		height: 30px;
+		background-color: tomato;
+		color: white;
+	}
+	
+	#calTr{
+		background-color: tomato;
+		color: white;
+	}
+	.th7{
+		text-align: center;
+	}
+	#topBar{
+		background-color: tomato;
+		color: white;
+		height: 30px;	
+	}
+	
+	 #topBar a:link{
+ 	color: white;
+ 	text-decoration: none;
+ }
+ 
+ #topBar a:hover {
+	color: white;
+	text-decoration: none;
+ }
+ 
+ #topBar a:visited {
+	color: white;
+	text-decoration: none;
+}
+ td a:link{
+ 	color: white;
+ 	text-decoration: none;
+ }
+ 
+ td a:hover {
+	color: white;
+	text-decoration: none;
+ }
+ 
+ td a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+#schA{
+	cursor: pointer;
+	color: white;
+}
+
+#penIcon{
+	float: right;
+}
+.btn-3:hover {
+  text-decoration: none;
+}
+.btn-3 {
+	padding-bottom: 20px;
+	color: #fff;
+  cursor: pointer;
+	margin: 4px;
+	height: 25px;
+  background: tomato;
+  border: 1px solid #da251f;
+  box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+  letter-spacing: 1px;
+  transition: all 150ms linear;
+}
+
+.btn-3:hover {
+  background: tomato;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+  color: #ec817d;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #c2211c;
+  transition: all 250ms linear;
+}
+
+ #calendar tr td:hover {
+	border: 2px solid red;
+ }
+ 
+ #calendar tr td p:hover  {
+	text-shadow: 1px 1px 0 orange;
+ }
+ #calendar tr th a:hover  {
+	text-shadow: 1px 1px 0 orange;
+ }
+ 
+ #divIn{
+	 height: 30px;
+ }
+ 
+ #div1{
+ 	margin-left: 90px;
+ 	padding-top: 5px;
+ 	height: 30px;
+ 	width: 40%;
+ 	float: left;
+ 	margin-left: 168px;
+ }
+ 
+ #div2{
+ 	margin-left: 85px;
+ 	float: left;
+ }

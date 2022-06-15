@@ -1,0 +1,23 @@
+
+.select-wrapper {
+  position: relative;
+  width: 460px;
+  border: 0;
+  border-radius: 3px;
+  background: #fcfcfc;
+}
+.select-wrapper select {
+  width: 300px;
+  height: 28px;
+  padding: 0 20px 0 7px;
+  background: transparent;
+  border: 1px solid #cccccc;
+  color:#cccccc;
+  font-family: Futura;
+  appearance: none;            /* remove arrow        */
+  -webkit-appearance: none;    /* remove arrow Chrome */
+  -moz-appearance: none;       /* remove arrow FF     */
+}
+.select-wrapper select::-ms-expand{
+	display: none;             /* remove arrow IE     */
+}

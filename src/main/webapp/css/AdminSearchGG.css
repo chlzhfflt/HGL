@@ -1,0 +1,165 @@
+@charset "UTF-8";
+#container{
+   margin: auto;
+   width: 1280px;
+   height: 100%;
+}
+
+#a{
+width: 100%;
+}
+
+#c{
+width: 100%;
+}
+
+#b{
+color: white;
+height: 515px;
+width: 100%; 
+display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+}
+ 
+ #bodyMain{
+    position: relative;
+    width: 80%;
+    height: 95%;
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+     flex-direction: column;
+ }
+ 
+ .th{
+ 	background-color: tomato;
+ 	text-align: center;
+    font-weight:bold;
+    text-shadow: 1px 1px 0px black;
+ }
+ 
+ td{
+    text-align: center;
+      border: 1px solid white;
+
+ }
+ 
+ tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+ 
+ table{
+    width:98%;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+ }
+ 
+ #paging{
+    text-align: center;
+    width: 98%;
+    background-color: tomato;
+    border: 1px solid white;
+    box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+  letter-spacing: 1px;
+ }
+ 
+ #boardName{
+    display: -webkit-flex;
+     display:         flex;
+     -webkit-align-items: center;
+             align-items: center;
+     -webkit-justify-content: center;
+             justify-content: center;
+    text-align: center;
+    height: 30px;
+    width: 98%;
+    background-color: tomato;
+    border: 1px solid white;
+    box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+    text-shadow: 1px 1px 0 black;
+  letter-spacing: 1px;
+ }
+ 
+ table a:link{
+ 	color: white;
+ 	text-decoration: none;
+ }
+ 
+ table a:hover {
+	color: white;
+	text-decoration: none;
+ }
+ 
+ table a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+#paging{
+	text-shadow: 1px 1px 0px black;
+}
+
+#paging a:link{
+ 	color: white;
+ 	text-decoration: none;
+ 	text-shadow: 1px 1px 0 black;
+ }
+ 
+#paging a:hover {
+	color: white;
+	text-decoration: none;
+ 	text-shadow: 1px 1px 0 orange;
+ }
+ 
+#paging a:visited {
+	color: white;
+	text-decoration: none;
+ 	text-shadow: 1px 1px 0 black;
+}
+
+#paging strong{
+	text-shadow: 1px 1px 0px orange;
+}
+
+#paging strong:link{
+	color: white;
+	text-decoration: none;
+}
+#paging strong:hover{
+	color: white;
+	text-decoration: none;
+}
+#paging strong:visited{
+	color: white;
+	text-decoration: none;
+}
+
+.btn-3 {
+	padding-bottom: 20px;
+	color: #fff;
+  cursor: pointer;
+	margin: 4px;
+	height: 25px;
+  background: tomato;
+  border: 1px solid #da251f;
+  box-shadow: 1px 1px 0 #d6251f, 2px 2px 2px #e02a24;
+  letter-spacing: 1px;
+  transition: all 150ms linear;
+}
+
+.btn-3:hover {
+  background: tomato;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+  color: #ec817d;
+  text-decoration: none;
+  text-shadow: 1px 1px 0 #c2211c;
+  transition: all 250ms linear;
+}

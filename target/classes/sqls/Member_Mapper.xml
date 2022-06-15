@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="member">
+	<resultMap type="com.lol.hgl.dto.memberDto" id="memberDto"> 
+		<result column="MEMBERNO" property="memberNo"/>
+		<result column="MEMBERID" property="memberId"/>
+		<result column="MEMBERPW" property="memberPw"/>
+		<result column="MEMBERNICKNAME" property="memberNickname"/>
+		<result column="MEMBEREMAIL" property="memberEmail"/>
+		<result column="MEMBERPHONE" property="memberPhone"/>
+		<result column="MEMBERDO" property="memberDo"/>
+		<result column="MEMBERCITY" property="memberCity"/>	
+		<result column="MEMBERADDR" property="memberAddr"/>	
+		<result column="MEMBERROLE" property="memberRole"/>	
+		<result column="MEMBERPROHIBITCOUNT" property="memberProhibitCount"/>	
+		<result column="MEMBERPROHIBITTIME" property="memberProhibitTime"/>	
+		<result column="MEMBERPROHIBITCHK" property="memberProhibitChk"/>	
+		<result column="MEMBERSMS" property="memberSMS"/>	
+		<result column="MEMBERLOGOUTTIME" property="memberLogoutTime"/>	
+	</resultMap>
+	
+	<select id="idChk" parameterType="String" resultType="String">
+		 SELECT MEMBERID FROM MEMBER WHERE MEMBERID=#{id}
+	</select>
+	
+	<select id="nickNameChk" parameterType="String" resultType="String">
+		 SELECT MEMBERNICKNAME FROM MEMBER WHERE MEMBERNICKNAME=#{nickName}
+	</select>
+	
+	
+	<select id="emailChk" parameterType="String" resultType="String">
+		 SELECT MEMBEREMAIL FROM MEMBER WHERE MEMBEREMAIL=#{email}
+	</select>
+	
+	<insert id="singUp" parameterType="memberDto" >
+		INSERT INTO MEMBER VALUES(MEMBERNO_SEQ.NEXTVAL, #{memberId}, #{memberPw}, #{memberNickname}, #{memberEmail}, #{memberPhone}, #{memberDo}, #{memberCity}, 
+		#{memberAddr}, 'USER', 0, null, 'N', #{memberSMS}, null)
+	</insert>
+	
+		
+	<select id="IDSearch" parameterType="String" resultType="String">
+		 SELECT MEMBERID FROM MEMBER WHERE MEMBEREMAIL=#{email} 
+	</select>
+	
+	
+	<select id="memberCertification" parameterType="Map" resultType="String">
+		 SELECT MEMBERPW FROM MEMBER WHERE MEMBEREMAIL=#{email} AND MEMBERID=#{id} 
+	</select>
+
+
+	<select id="LoginChk" parameterType="String" resultType="String">
+		 SELECT MEMBERPW FROM MEMBER WHERE MEMBERID=#{id}
+	</select>
+	
+	<select id="Login" parameterType="String" resultMap="memberDto">
+		 SELECT * FROM MEMBER WHERE MEMBERID=#{memberId} 
+	</select>
+	
+	<select id="detailLogin" parameterType="int" resultMap="memberDto">
+		 SELECT * FROM MEMBER WHERE MEMBERNO=#{memberNo} 
+	</select>
+	
+	<update id="pwChange" parameterType="memberDto">
+		UPDATE MEMBER SET MEMBERPW=#{memberPw} WHERE MEMBERID=#{memberId} AND MEMBEREMAIL=#{memberEmail}
+	</update>
+	
+	<update id="updateMemberInfo" parameterType="memberDto">
+		UPDATE MEMBER SET MEMBERPHONE=#{memberPhone}, MEMBERSMS=#{memberSMS}, MEMBERDO=#{memberDo}, MEMBERCITY=#{memberCity}, MEMBERADDR=#{memberAddr} WHERE MEMBERNO=#{memberNo}
+	</update>
+
+	<delete id="getOut" parameterType="int">
+		DELETE FROM MEMBER WHERE MEMBERNO=#{memberNo}
+	</delete>
+	
+	<select id="searchMember" parameterType="String" resultType="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBERNICKNAME = #{memberNickName}
+	</select>
+	
+	<update id="logOutTime" parameterType="String">
+		UPDATE MEMBER SET MEMBERLOGOUTTIME=SYSDATE WHERE MEMBERID=#{memberId}
+	</update>
+	
+	<select id="MangeList" resultMap="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBERPROHIBITCHK='Y'
+	</select>
+
+	<update id="updateMangeChk" parameterType="String">
+		UPDATE MEMBER SET MEMBERPROHIBITCHK='N' WHERE MEMBERNICKNAME=#{memberNickName}
+	</update>
+	
+	<select id="smsList" resultMap="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBERSMS='Y'
+	</select>
+
+</mapper>

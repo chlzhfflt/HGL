@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+	<resultMap type="com.lol.hgl.dto.memberDto" id="memberDtoMap"> 
+		<result column="MEMBERNO" property="memberNo"/>
+		<result column="MEMBERID" property="memberId"/>
+		<result column="MEMBERPW" property="memberPw"/>
+		<result column="MEMBERNICKNAME" property="memberNickname"/>
+		<result column="MEMBEREMAIL" property="memberEmail"/>
+		<result column="MEMBERPHONE" property="memberPhone"/>
+		<result column="MEMBERDO" property="memberDo"/>
+		<result column="MEMBERCITY" property="memberCity"/>	
+		<result column="MEMBERADDR" property="memberAddr"/>	
+		<result column="MEMBERROLE" property="memberRole"/>	
+		<result column="MEMBERPROHIBITCOUNT" property="memberProhibitCount"/>	
+		<result column="MEMBERPROHIBITTIME" property="memberProhibitTime"/>	
+		<result column="MEMBERPROHIBITCHK" property="memberProhibitChk"/>	
+		<result column="MEMBERSMS" property="memberSMS"/>	
+	</resultMap>
+	
+	<resultMap type="com.lol.hgl.dto.ggDto" id="ggDtoMap">
+		<result column="GGNO" property="ggNo"/>
+		<result column="GGROWNUM" property="ggRowNum"/>
+		<result column="GGWRITER" property="ggWriter"/>
+		<result column="GGTITLE" property="ggTitle"/>
+		<result column="GGCONT" property="ggCont"/>
+		<result column="GGREADCNT" property="ggReadcnt"/>
+		<result column="GGDATE" property="ggDate"/>
+	</resultMap>
+	
+	<resultMap type="com.lol.hgl.dto.fwlbDto" id="fwlbDtoMap">
+		<result column="FWLBNO" property="fwlbNo"/>
+		<result column="FWLBROWNUM" property="fwlbRowNum"/>
+		<result column="FWLBWRITER" property="fwlbWriter"/>	
+		<result column="FWLBTITLE" property="fwlbTitle"/>	
+		<result column="FWLBREADCNT" property="fwlbReadcnt"/>
+		<result column="FWLBDATE" property="fwlbDate"/>
+	</resultMap>
+	
+	<select id="memberAllListCount" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<select id="memberAllList" parameterType="map" resultMap="memberDtoMap">
+	<![CDATA[
+	select *
+	from ( 
+    select A.MEMBERNO, A.MEMBERID, A.MEMBERPW, A.MEMBERNICKNAME, A.MEMBEREMAIL, A.MEMBERPHONE, A.MEMBERDO,
+  		   A.MEMBERCITY, A.MEMBERADDR, A.MEMBERROLE, A.MEMBERPROHIBITCOUNT, A.MEMBERPROHIBITTIME, A.MEMBERPROHIBITCHK, A.MEMBERSMS,
+  		   A.MEMBERLOGOUTTIME, 
+    ROWNUM AS RN
+    from (
+        select *
+        from MEMBER ORDER BY MEMBERNO DESC) A
+    where ROWNUM <= #{endPost}) X
+	where X.RN >= #{startPost}
+	ORDER BY X.MEMBERNO
+	]]>
+	</select>
+	
+	<select id="memberSelectOne" parameterType="String" resultType="memberDto">
+		SELECT * FROM MEMBER WHERE MEMBERNICKNAME=#{memberNickName}
+	</select>
+	
+	<select id="ggCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM GG WHERE GGWRITER = #{memberNickName}
+	</select>
+	
+	<select id="fwlbCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM FWLB WHERE FWLBWRITER = #{memberNickName}
+	</select>
+	
+	<select id="memberGGList" parameterType="map" resultMap="ggDtoMap">
+	<![CDATA[
+	select *
+	from ( 
+    select A.GGNO, A.GGROWNUM, A.GGWRITER, A.GGTITLE, A.GGCONT, A.GGREADCNT, A.GGDATE,
+    ROWNUM AS RN
+    from (
+        select *
+        from GG 
+        WHERE GGWRITER = #{memberNickName}
+        ORDER BY GGNO DESC) A
+    where ROWNUM <= TO_NUMBER(#{endPost})) X
+	where X.RN >= TO_NUMBER(#{startPost})
+	ORDER BY X.GGNO desc
+	]]>
+	</select>
+	
+	<select id="memberFwlbList" parameterType="map" resultMap="fwlbDtoMap">
+	<![CDATA[
+	select *
+	from ( 
+    select A.FWLBNO, A.FWLBWRITER, A.FWLBTITLE, A.FWLBREADCNT, A.FWLBDATE,
+    ROWNUM AS RN
+    from (
+        select *
+        from FWLB WHERE FWLBWRITER = #{memberNickName} 
+        ORDER BY FWLBNO DESC) A
+    where ROWNUM <= TO_NUMBER(#{endPost})) X
+	where X.RN >= TO_NUMBER(#{startPost})
+	ORDER BY X.FWLBNO DESC
+	]]>
+	</select>
+	
+	<delete id="ggDelete" parameterType="int">
+	DELETE FROM GG WHERE GGNO=#{ggNo}
+	</delete>
+	
+	<delete id="fwlbDelete" parameterType="int">
+	DELETE FROM FWLB WHERE FWLBNO=#{fwlbNo}
+	</delete>
+	
+	<update id="prohibitCount" parameterType="String">
+		UPDATE MEMBER SET MEMBERPROHIBITCOUNT = MEMBERPROHIBITCOUNT+1 WHERE MEMBERNICKNAME=#{memberNickName}
+	</update>
+	
+	<update id="prohibitChk" parameterType="String">
+		UPDATE MEMBER SET MEMBERPROHIBITCHK = 'Y' WHERE MEMBERNICKNAME=#{memberNickName}
+	</update>
+	
+	<update id="prohibitMangeTime" parameterType="memberDto">
+		UPDATE MEMBER SET MEMBERPROHIBITTIME = #{memberProhibitTime} WHERE MEMBERNICKNAME=#{memberNickname}
+	</update>
+	
+	<update id="downProhibitcount" parameterType="String">
+		UPDATE MEMBER SET MEMBERPROHIBITCOUNT = MEMBERPROHIBITCOUNT-1 WHERE MEMBERNICKNAME=#{memberNickName}
+	</update>
+	
+	<update id="prohibitCancel" parameterType="String">
+		UPDATE MEMBER SET MEMBERPROHIBITCHK = 'N' WHERE MEMBERNICKNAME=#{memberNickName}
+	</update>
+	
+	<delete id="memberGetOut" parameterType="String">
+		DELETE FROM MEMBER WHERE MEMBERNICKNAME=#{memberNickName}
+	</delete>
+
+
+</mapper>

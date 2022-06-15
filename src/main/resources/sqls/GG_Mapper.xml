@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gg">
+
+	<resultMap type="com.lol.hgl.dto.ggDto" id="ggDtoMap">
+		<result column="GGNO" property="ggNo"/>
+		<result column="GGROWNUM" property="ggRowNum"/>
+		<result column="GGWRITER" property="ggWriter"/>
+		<result column="GGTITLE" property="ggTitle"/>
+		<result column="GGCONT" property="ggCont"/>
+		<result column="GGREADCNT" property="ggReadcnt"/>
+		<result column="GGDATE" property="ggDate"/>
+	</resultMap>
+	
+	<resultMap type="com.lol.hgl.dto.ggcmDto" id="ggcmDtoMap">
+		<result column="GGNO" property="ggNo"/>
+		<result column="GGCMNO" property="ggcmNo"/>
+		<result column="GGCMWRITER" property="ggcmWriter"/>
+		<result column="GGCMCONT" property="ggcmCont"/>
+		<result column="GGCMDATE" property="ggcmDate"/>
+	</resultMap>
+	
+	<resultMap type="com.lol.hgl.dto.ggImgDto" id="ggImgDtoMap">
+		<result column="GGIMGNO" property="ggImgNo"/>
+		<result column="GGNO" property="ggNo"/>
+		<result column="GGIMGORIGINALNAME" property="ggImgOrginalName"/>
+		<result column="GGIMGSTORENAME" property="ggImgStoreName"/>
+		<result column="GGIMGSIZE" property="ggImgSize"/>
+		<result column="GGIMGDATE" property="ggImgDate"/>
+		<result column="GGIMGCREATUSER" property="ggImgCreatUser"/>
+		<result column="GGIMGDEL" property="ggImgDel"/>
+	</resultMap>
+	
+	<select id="ggListCount" resultType="int">
+	 SELECT COUNT(*) FROM GG 
+	</select>
+	
+	<select id="ggAllList" resultMap="ggDtoMap">
+		SELECT * FROM GG order by ggNo
+	</select>
+	
+	<update id="insertGGRowNum" parameterType="map">
+		UPDATE GG SET GGROWNUM=#{rowNum} WHERE GGNO=#{ggNo}
+	</update>
+	
+	<select id="selectAll" parameterType="map" resultMap="ggDtoMap">
+	<![CDATA[
+	select *
+	from ( 
+    select A.GGNO, A.GGROWNUM, A.GGWRITER, A.GGTITLE, A.GGCONT, A.GGREADCNT, A.GGDATE,
+    ROWNUM AS RN
+    from (
+        select *
+        from GG ORDER BY GGNO DESC) A
+    where ROWNUM <= #{endPost}) X
+	where X.RN >= #{startPost}
+	ORDER BY X.GGNO desc
+	]]>
+	</select>
+	
+	<select id="ggListSerchCount" parameterType="map" resultType="int">
+	SELECT COUNT(*) FROM GG WHERE ${topic} LIKE #{keyword} order by ggNo
+	</select>
+	
+	<select id="ggSearchAllList" parameterType="map" resultMap="ggDtoMap">
+		SELECT * FROM GG WHERE ${topic} LIKE #{keyword}
+	</select>
+	
+	<select id="selectSearchAll" parameterType="map" resultMap="ggDtoMap">
+	<![CDATA[
+	select *
+	from ( 
+    select A.GGNO, A.GGROWNUM, A.GGWRITER, A.GGTITLE, A.GGCONT, A.GGREADCNT, A.GGDATE,
+    ROWNUM AS RN
+    from (
+        select *
+        from GG 
+        WHERE ${topic} LIKE #{keyword}
+        ORDER BY GGNO DESC) A
+    where ROWNUM <= TO_NUMBER(#{endPost})) X
+	where X.RN >= TO_NUMBER(#{startPost})
+	ORDER BY X.GGNO desc
+	]]>
+	</select>
+	
+	<select id="selectOne" resultType="ggDto" parameterType="int">
+		SELECT * FROM GG WHERE GGNO=#{ggNo}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM GG WHERE GGNO = #{ggNo}
+	</delete>
+	
+	<insert id="insert" parameterType="ggDto">
+		INSERT INTO GG VALUES(
+		GGNO_SEQ.NEXTVAL, null, #{ggWriter}, #{ggTitle}, #{ggCont}, 0, SYSDATE
+		)
+	</insert>
+	
+	<update id="update" parameterType="ggDto">
+		UPDATE GG SET GGTITLE= #{ggTitle}, GGCONT= #{ggCont} WHERE GGNO= #{ggNo}
+	</update>
+	
+	<insert id="repleyInsert" parameterType="ggcmDto">
+		INSERT INTO GGCM VALUES(
+		#{ggNo},GGCMNO_SEQ.NEXTVAL, #{ggcmWriter}, #{ggcmCont}, SYSDATE
+		)
+	</insert>
+	
+	<select id="repleySelectList" resultMap="ggcmDtoMap" parameterType="int">
+		SELECT * FROM GGCM WHERE GGNO=#{ggNo} ORDER BY GGCMNO
+	</select>
+	
+	<select id="repleyDelete" parameterType="int">
+		DELETE FROM GGCM WHERE GGCMNO = #{ggcmNo}
+	</select>
+	
+	<update id="updateReadCount" parameterType="int">
+		UPDATE GG SET GGREADCNT = GGREADCNT + 1 WHERE GGNO=#{ggNo}
+	</update>
+
+
+	<select id="newGgNo" resultType="int">
+	SELECT * FROM(
+	SELECT * FROM GG ORDER BY GGDATE DESC)
+	WHERE ROWNUM=1
+	</select>
+	
+	<insert id="insertGgImage" parameterType="ggImgDto">
+		INSERT INTO GGIMG VALUES(GGIMGNO_SEQ.NEXTVAL, #{ggNo}, #{ggImgOrginalName}, #{ggImgStoreName}, #{ggImgSize}, SYSDATE, #{ggImgCreatUser}, 'N')
+	</insert>
+	
+	<select id="imgSelectOne" parameterType="int" resultMap="ggImgDtoMap">
+		SELECT * FROM GGIMG WHERE GGNO=#{ggNo}
+	</select>
+	
+	<delete id="deleteImg" parameterType="int">
+		DELETE FROM GGIMG WHERE GGNO=#{ggNo}
+	</delete>
+	
+	<update id="updeateImgDelY" parameterType="int">
+		UPDATE GGIMG SET GGIMGDEL='Y' WHERE GGNO=#{ggNo}
+	</update>
+
+	<update id="updeateImgDelN" parameterType="map">
+		UPDATE GGIMG SET GGIMGDEL='N' WHERE GGIMGNO IN 
+		<foreach collection="ggImgNos" item="ggImgNo" open="(" separator="," close=")">
+		#{ggImgNo}
+		</foreach>
+	</update>
+	
+	<delete id="deleteImgDelY" >
+		DELETE FROM GGIMG WHERE GGIMGDEL='Y'
+	</delete>
+	
+	
+</mapper>

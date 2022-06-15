@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- db.properties 위치 -->
+	<!-- classpath가 src/main/resources/ 에서 db.properties 자동으로 잡아줌   -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:properties/db.properties"/>
+	</bean>
+	
+	<!-- datasource -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSoruce">
+	 	<property name="driverClassName" value="${driver}"/>
+		<property name="url" value="${url}"/>
+		<property name="username" value="${username}"/>
+		<property name="password" value="${password}"/>
+		<property name="defaultAutoCommit" value="true"/>
+	</bean>	
+	
+	<!-- datasource 연결. sql 섹션 만들기 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
+		<property name="dataSource" ref="dataSoruce"/>
+		<property name="configLocation" value="WEB-INF/spring/sqls/Config.xml"/>
+	</bean>
+	
+	<!--  sqlsesstionFactoryBean을 sqlSessionTemplate으로  -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
+	</bean>	
+	
+	<!--CommonsMultipartResolver : 임시 파일을 서블릿 컨테이너의 임시 디렉토리에 저장하는 클래스. 응용 프로그램 컨텍스트 또는 ServletContext (독립 실행 형 사용)를 사용하는 생성자를 통해 초기화해야합니다.-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="99999999999"/> <!-- 서버에 업로드할 수 있는 첨부파일의 최대 크기-->		
+		<property name="defaultEncoding" value="UTF-8"/> <!-- 기본 인코딩 --> 
+	</bean>
+		
+</beans>
