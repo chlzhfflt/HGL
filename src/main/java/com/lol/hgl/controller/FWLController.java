@@ -17,6 +17,8 @@ import com.lol.hgl.dto.fwlbDto;
 import com.lol.hgl.dto.fwlbcmDto;
 import com.lol.hgl.dto.memberDto;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class FWLController {
 	
@@ -173,7 +175,7 @@ public class FWLController {
 	   }
 	   
 	   @RequestMapping(value="FWLBCMInsert.do")
-	   public String FWLBCMInsert(@ModelAttribute fwlbcmDto dto, String fwlbWriter, int fwlbNo, Model model) {
+	   public String FWLBCMInsert(@ModelAttribute fwlbcmDto dto, String fwlbWriter, int fwlbNo, Model model, HttpSession session) {
 		   fwlBizz.FWLBCMInsert(dto);
 		   model.addAttribute("fwlbNo", fwlbNo);
 		   model.addAttribute("fwlbWriter", fwlbWriter);
