@@ -160,12 +160,12 @@ public class FWLController {
 
 
 	@RequestMapping(value="FWLBDetail.do")
-	public String FWLBDetail(String fwlbWriter, int count, String fwlbNo, Model model) {
-		fwlbDto fwlbdto = fwlBizz.FWLBDetail(fwlbWriter, Integer.parseInt(fwlbNo));
+	public String FWLBDetail(int count, int fwlbNo, Model model) {
 		if(count == 1) {
-			fwlBizz.FWLBUpdateReadCount(fwlbdto.getFwlbNo());
+			fwlBizz.FWLBUpdateReadCount(fwlbNo);
 		}
-		memberDto memberdto = memberBizz.searchMember(fwlbWriter);
+		fwlbDto fwlbdto = fwlBizz.FWLBDetail(fwlbNo);
+		memberDto memberdto = memberBizz.searchMember(fwlbdto.getFwlbWriter());
 		List<fwlDto> fwlList = fwlBizz.fwlList(memberdto.getMemberNo());
 		List<fwlbcmDto> fwlbcmList = fwlBizz.fwlbcmList(fwlbdto.getFwlbNo());
 		model.addAttribute("dto",fwlbdto);

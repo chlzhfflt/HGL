@@ -46,8 +46,8 @@ public class FWLBIZZImple implements FWLBizz {
 	}
 
 	@Override
-	public fwlbDto FWLBDetail(String memberNickName, int fwlbNo) {
-		return dao.FWLBDetail(memberNickName, fwlbNo);
+	public fwlbDto FWLBDetail(int fwlbNo) {
+		return dao.FWLBDetail(fwlbNo);
 	}
 
 	@Override

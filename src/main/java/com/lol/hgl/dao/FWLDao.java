@@ -15,7 +15,7 @@ public interface FWLDao {
 	public int FWLDelete(int fwlNo);
 	public int FWLBInsert(fwlbDto dto);
 
-	public fwlbDto FWLBDetail(String memberNickName, int fwlbNo);
+	public fwlbDto FWLBDetail(int fwlbNo);
 	public int FWLBUpdateReadCount(int fwlbNo);
 	public List<fwlbcmDto> fwlbcmList(int fwlbNO);
 

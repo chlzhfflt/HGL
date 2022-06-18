@@ -49,12 +49,12 @@
 		INSERT INTO FWLB VALUES(FWLBNO_SEQ.NEXTVAL, null, #{fwlbWriter}, #{fwlbTitle}, 0, SYSDATE)
 	</insert>
 
-	<select id="FWLBDetail" parameterType="fwlbDto" resultType="fwlbDto">
-		SELECT * FROM FWLB WHERE FWLBWRITER=#{fwlbWriter} AND FWLBNO=#{fwlbNo}
+	<select id="FWLBDetail" parameterType="int" resultType="fwlbDto">
+		SELECT * FROM FWLB WHERE FWLBNO=#{fwlbNo}
 	</select>
 
 	<select id="fwlbcmList" parameterType="int" resultMap="fwlbcmDto">
-		SELECT * FROM FWLBCM WHERE FWLBNO=#{fwlbNo} order by FWLBCMNO DESC
+		SELECT * FROM FWLBCM WHERE FWLBNO=#{fwlbNo} order by FWLBCMNO
 	</select>
 
 	<select id="FWLBListCount" resultType="int">

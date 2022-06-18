@@ -82,11 +82,10 @@ public class FWLDaoImple implements FWLDao {
 
 
 	@Override
-	public fwlbDto FWLBDetail(String memberNickName, int fwlbNo) {
+	public fwlbDto FWLBDetail(int fwlbNo) {
 		fwlbDto res = new fwlbDto();
-		fwlbDto dto = new fwlbDto(memberNickName, fwlbNo);
 		try {
-			res = sqlSession.selectOne(nameSpace+"FWLBDetail", dto);
+			res = sqlSession.selectOne(nameSpace+"FWLBDetail", fwlbNo);
 		}catch(Exception e ) {
 			e.printStackTrace();
 		}
