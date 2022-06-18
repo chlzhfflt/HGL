@@ -3,17 +3,17 @@ package com.lol.hgl.dto;
 import java.util.Date;
 
 public class fwlbcmDto {
-	
+
 	private int fwlbNo;
 	private int fwlbcmNo;
 	private String fwlbcmWriter;
 	private String fwlbcmCont;
 	private Date fwlbcmDate;
-	
+
 	public fwlbcmDto() {
-		
+
 	}
-	
+
 	public fwlbcmDto(int fwlbNo, int fwlbcmNo, String fwlbcmWriter, String fwlbcmCont, Date fwlbcmDate) {
 		this.fwlbNo = fwlbNo;
 		this.fwlbcmNo = fwlbcmNo;

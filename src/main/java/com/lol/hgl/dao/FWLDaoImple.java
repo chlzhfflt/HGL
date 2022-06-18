@@ -16,19 +16,19 @@ import com.lol.hgl.dto.fwlbcmDto;
 
 @Repository
 public class FWLDaoImple implements FWLDao {
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-	
+
 	private String nameSpace = "fwl.";
 
 	public List<fwlDto> fwlList(int memberNo) {
 		List<fwlDto> list = new ArrayList<fwlDto>();
 		try {
 			list = sqlSession.selectList(nameSpace+"fwlList", memberNo);
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}	
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 
@@ -38,9 +38,9 @@ public class FWLDaoImple implements FWLDao {
 		int res = 0;
 		try {
 			res = sqlSession.insert(nameSpace+"fwlInsert", dto);
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}	
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 		return res;
 	}
 
@@ -49,7 +49,7 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLSuccess(int fwlNo) {
 		int res = 0;
 		try {
-			res = sqlSession.update(nameSpace+"fwlFWLSuccess", fwlNo);			
+			res = sqlSession.update(nameSpace+"fwlFWLSuccess", fwlNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -62,9 +62,9 @@ public class FWLDaoImple implements FWLDao {
 		int res = 0;
 		try {
 			res = sqlSession.insert(nameSpace+"FWLDelete", fwlNo);
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}	
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 		return res;
 	}
 
@@ -74,9 +74,9 @@ public class FWLDaoImple implements FWLDao {
 		int res = 0;
 		try {
 			res = sqlSession.insert(nameSpace+"FWLBInsert", dto);
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}	
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 		return res;
 	}
 
@@ -87,9 +87,9 @@ public class FWLDaoImple implements FWLDao {
 		fwlbDto dto = new fwlbDto(memberNickName, fwlbNo);
 		try {
 			res = sqlSession.selectOne(nameSpace+"FWLBDetail", dto);
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}	
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 		return res;
 	}
 
@@ -99,9 +99,9 @@ public class FWLDaoImple implements FWLDao {
 		List<fwlbcmDto> list = new ArrayList<fwlbcmDto>();
 		try {
 			list = sqlSession.selectList(nameSpace+"fwlbcmList", fwlbNO);
-			}catch(Exception e ) {
-				e.printStackTrace();
-			}	
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}
 		return list;
 	}
 
@@ -110,7 +110,7 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLSuccessCancel(int fwlNo) {
 		int res = 0;
 		try {
-			res = sqlSession.update(nameSpace+"FWLSuccessCancel", fwlNo);			
+			res = sqlSession.update(nameSpace+"FWLSuccessCancel", fwlNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -122,24 +122,24 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLBListCount() {
 		int res = 0;
 		try {
-			res = sqlSession.selectOne(nameSpace+"FWLBListCount");			
+			res = sqlSession.selectOne(nameSpace+"FWLBListCount");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
+
 	@Override
 	public List<fwlbDto> fwlbAllList() {
 		List<fwlbDto> list = new ArrayList<>();
 		try {
-			list = sqlSession.selectList(nameSpace+"fwlbAllList");			
+			list = sqlSession.selectList(nameSpace+"fwlbAllList");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-	
+
 
 	@Override
 	public int insertFWLBRowNum(int rowNum, int fwlbNo) {
@@ -148,7 +148,7 @@ public class FWLDaoImple implements FWLDao {
 		map.put("rowNum", rowNum);
 		map.put("fwlbNo", fwlbNo);
 		try {
-			res = sqlSession.update(nameSpace+"insertFWLBRowNum", map);			
+			res = sqlSession.update(nameSpace+"insertFWLBRowNum", map);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -164,7 +164,7 @@ public class FWLDaoImple implements FWLDao {
 		map.put("startPost", startPost);
 		map.put("endPost", endPost);
 		try {
-			list = sqlSession.selectList(nameSpace+"FwlbList", map);			
+			list = sqlSession.selectList(nameSpace+"FwlbList", map);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -177,19 +177,19 @@ public class FWLDaoImple implements FWLDao {
 		int res = 0;
 		searchNickName = "%"+searchNickName+"%";
 		try {
-			res = sqlSession.selectOne(nameSpace+"FWLBListSearchCount", searchNickName);			
+			res = sqlSession.selectOne(nameSpace+"FWLBListSearchCount", searchNickName);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
+
 	@Override
 	public List<fwlbDto> fwlbSearchAllList(String searchNickName) {
 		List<fwlbDto> list = new ArrayList<>();
 		searchNickName = "%"+searchNickName+"%";
 		try {
-			list = sqlSession.selectList(nameSpace+"fwlbSearchAllList", searchNickName);			
+			list = sqlSession.selectList(nameSpace+"fwlbSearchAllList", searchNickName);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -205,11 +205,11 @@ public class FWLDaoImple implements FWLDao {
 		map.put("endPost", String.valueOf(endPost));
 		map.put("searchNickName", searchNickName);
 		try {
-			list = sqlSession.selectList(nameSpace+"FwlbListSearch", map);			
+			list = sqlSession.selectList(nameSpace+"FwlbListSearch", map);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
@@ -217,7 +217,7 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLBCMInsert(fwlbcmDto dto) {
 		int res = 0;
 		try {
-			res = sqlSession.insert(nameSpace+"FWLBCMInsert", dto);			
+			res = sqlSession.insert(nameSpace+"FWLBCMInsert", dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -229,7 +229,7 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLBCMDelete(int fwlbcmNo) {
 		int res = 0;
 		try {
-			res = sqlSession.delete(nameSpace+"FWLBCMDelete", fwlbcmNo);			
+			res = sqlSession.delete(nameSpace+"FWLBCMDelete", fwlbcmNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -241,7 +241,7 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLBUpdateReadCount(int fwlbNo) {
 		int res = 0;
 		try {
-			res = sqlSession.update(nameSpace+"FWLBUpdateReadCount", fwlbNo);			
+			res = sqlSession.update(nameSpace+"FWLBUpdateReadCount", fwlbNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -253,7 +253,7 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLBDelete(int fwlbNo) {
 		int res = 0;
 		try {
-			res = sqlSession.delete(nameSpace+"FWLBDelete", fwlbNo);			
+			res = sqlSession.delete(nameSpace+"FWLBDelete", fwlbNo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -265,20 +265,20 @@ public class FWLDaoImple implements FWLDao {
 	public int FWLBDeleteAll(String fwlbWriter) {
 		int res = 0;
 		try {
-			res = sqlSession.delete(nameSpace+"FWLBDeleteAll", fwlbWriter);			
+			res = sqlSession.delete(nameSpace+"FWLBDeleteAll", fwlbWriter);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
-	
-
-
-	
 
 
 
 
-	
+
+
+
+
+
+
 }

@@ -14,7 +14,7 @@ import com.lol.hgl.dto.fwlbcmDto;
 public class FWLBIZZImple implements FWLBizz {
 
 	@Autowired FWLDao dao;
-	
+
 	@Override
 	public List<fwlDto> fwlList(int memberNo) {
 		return dao.fwlList(memberNo);
@@ -64,10 +64,10 @@ public class FWLBIZZImple implements FWLBizz {
 	public int FWLBListCount() {
 		return dao.FWLBListCount();
 	}
-	
+
 	@Override
 	public void insertFWLBRowNum() {
-		List<fwlbDto> list = dao.fwlbAllList(); //1붵 시작 
+		List<fwlbDto> list = dao.fwlbAllList(); //1붵 시작
 		int rowNum = 1;
 		for(int i=0; i<list.size(); i++) {
 			int fwlbNo = list.get(i).getFwlbNo();
@@ -87,7 +87,7 @@ public class FWLBIZZImple implements FWLBizz {
 	public int FWLBListSearchCount(String searchNickName) {
 		return dao.FWLBListSearchCount(searchNickName);
 	}
-	
+
 	@Override
 	public void insertFWLBSearchRowNum(String searchNickName) {
 		List<fwlbDto> list = dao.fwlbSearchAllList(searchNickName);
@@ -98,7 +98,7 @@ public class FWLBIZZImple implements FWLBizz {
 			rowNum++;
 		}
 	}
-	
+
 	@Override
 	public List<fwlbDto> FwlbListSearch(int startPost, int endPost, String searchNickName) {
 		List<fwlbDto> list = dao.FwlbListSearch(startPost, endPost, searchNickName);
@@ -125,9 +125,9 @@ public class FWLBIZZImple implements FWLBizz {
 		return dao.FWLBDelete(fwlbNo);
 	}
 
-	
-		
-	
+
+
+
 
 
 

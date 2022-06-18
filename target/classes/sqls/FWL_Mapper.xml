@@ -3,129 +3,129 @@
 <mapper namespace="fwl">
 	<resultMap type="com.lol.hgl.dto.fwlDto" id="fwlDto">
 		<result column="MEMBERNO" property="memberNo"/>
-		<result column="FWLNO" property="fwlNo"/>	
-		<result column="FWLITEM" property="fwlItem"/>	
+		<result column="FWLNO" property="fwlNo"/>
+		<result column="FWLITEM" property="fwlItem"/>
 		<result column="FWLCHK" property="fwlChk"/>
 	</resultMap>
-	
+
 	<resultMap type="com.lol.hgl.dto.fwlbDto" id="fwlbDto">
 		<result column="FWLBNO" property="fwlbNo"/>
 		<result column="FWLBROWNUM" property="fwlbRowNum"/>
-		<result column="FWLBWRITER" property="fwlbWriter"/>	
-		<result column="FWLBTITLE" property="fwlbTitle"/>	
+		<result column="FWLBWRITER" property="fwlbWriter"/>
+		<result column="FWLBTITLE" property="fwlbTitle"/>
 		<result column="FWLBREADCNT" property="fwlbReadcnt"/>
 		<result column="FWLBDATE" property="fwlbDate"/>
 	</resultMap>
-	
+
 	<resultMap type="com.lol.hgl.dto.fwlbcmDto" id="fwlbcmDto">
 		<result column="FWLBNO" property="fwlbNo"/>
-		<result column="FWLBCMNO" property="fwlbcmNo"/>	
-		<result column="FWLBCMWRITER" property="fwlbcmWriter"/>	
+		<result column="FWLBCMNO" property="fwlbcmNo"/>
+		<result column="FWLBCMWRITER" property="fwlbcmWriter"/>
 		<result column="FWLBCMCONT" property="fwlbcmCont"/>
 		<result column="FWLBCMDATE" property="fwlbcmDate"/>
 	</resultMap>
-	
+
 	<select id="fwlList" parameterType="int" resultMap="fwlDto">
 		SELECT * FROM FWL WHERE MEMBERNO=#{memberNo} ORDER BY FWLNO DESC
 	</select>
-	
+
 	<insert id="fwlInsert" parameterType="fwlDto">
 		INSERT INTO FWL VALUES(#{memberNo}, FWLNO_SEQ.NEXTVAL, #{fwlItem}, 'N')
 	</insert>
-	
+
 	<update id="fwlFWLSuccess" parameterType="int">
 		UPDATE FWL SET FWLCHK='Y' WHERE FWLNO=#{fwlNo}
 	</update>
-	
+
 	<update id="FWLSuccessCancel" parameterType="int">
 		UPDATE FWL SET FWLCHK='N' WHERE FWLNO=#{fwlNo}
 	</update>
-	
+
 	<delete id="FWLDelete" parameterType="int">
 		DELETE FROM FWL WHERE FWLNO=#{fwlNo}
 	</delete>
-	
+
 	<insert id="FWLBInsert" parameterType="fwlbDto">
 		INSERT INTO FWLB VALUES(FWLBNO_SEQ.NEXTVAL, null, #{fwlbWriter}, #{fwlbTitle}, 0, SYSDATE)
 	</insert>
-	
+
 	<select id="FWLBDetail" parameterType="fwlbDto" resultType="fwlbDto">
 		SELECT * FROM FWLB WHERE FWLBWRITER=#{fwlbWriter} AND FWLBNO=#{fwlbNo}
 	</select>
-	
+
 	<select id="fwlbcmList" parameterType="int" resultMap="fwlbcmDto">
 		SELECT * FROM FWLBCM WHERE FWLBNO=#{fwlbNo} order by FWLBCMNO DESC
 	</select>
-	
+
 	<select id="FWLBListCount" resultType="int">
 		SELECT COUNT(*) FROM FWLB
 	</select>
-	
+
 	<select id="fwlbAllList" resultMap="fwlbDto">
 		SELECT * FROM FWLB order by FWLBNO
 	</select>
-	
+
 	<update id="insertFWLBRowNum" parameterType="map">
 		UPDATE FWLB SET FWLBROWNUM=#{rowNum} WHERE FWLBNO=#{fwlbNo}
 	</update>
-	
+
 	<select id="FwlbList" parameterType="map" resultMap="fwlbDto">
 	<![CDATA[
-	select *
-	from ( 
-    select A.FWLBNO, A.FWLBROWNUM, A.FWLBWRITER, A.FWLBTITLE, A.FWLBREADCNT, A.FWLBDATE,
-    ROWNUM AS RN
-    from (
-        select *
-        from FWLB ORDER BY FWLBNO DESC) A
-    where ROWNUM <= #{endPost}) X
-	where X.RN >= #{startPost}
-	ORDER BY X.FWLBNO DESC
-	]]>
+		select *
+		from (
+				 select A.FWLBNO, A.FWLBROWNUM, A.FWLBWRITER, A.FWLBTITLE, A.FWLBREADCNT, A.FWLBDATE,
+						ROWNUM AS RN
+				 from (
+						  select *
+						  from FWLB ORDER BY FWLBNO DESC) A
+				 where ROWNUM <= #{endPost}) X
+		where X.RN >= #{startPost}
+		ORDER BY X.FWLBNO DESC
+		]]>
 	</select>
 
 	<select id="FWLBListSearchCount" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM FWLB WHERE FWLBWRITER LIKE #{searchNickName}
 	</select>
-	
-	
+
+
 	<select id="fwlbSearchAllList" parameterType="String" resultMap="fwlbDto">
 		SELECT  * FROM FWLB WHERE FWLBWRITER LIKE #{searchNickName}  order by FWLBNO
 	</select>
-	
-	
+
+
 	<select id="FwlbListSearch" parameterType="map" resultMap="fwlbDto">
 		<![CDATA[
-	select *
-	from ( 
-    select A.FWLBNO, A.FWLBROWNUM,  A.FWLBWRITER, A.FWLBTITLE, A.FWLBREADCNT, A.FWLBDATE,
-    ROWNUM AS RN
-    from (
-        select *
-        from FWLB WHERE FWLBWRITER LIKE #{searchNickName} ORDER BY FWLBNO DESC) A
-   where ROWNUM <= TO_NUMBER(#{endPost})) X
-	where X.RN >= TO_NUMBER(#{startPost})
-	ORDER BY X.FWLBNO DESC
-	]]>
+		select *
+		from (
+				 select A.FWLBNO, A.FWLBROWNUM,  A.FWLBWRITER, A.FWLBTITLE, A.FWLBREADCNT, A.FWLBDATE,
+						ROWNUM AS RN
+				 from (
+						  select *
+						  from FWLB WHERE FWLBWRITER LIKE #{searchNickName} ORDER BY FWLBNO DESC) A
+				 where ROWNUM <= TO_NUMBER(#{endPost})) X
+		where X.RN >= TO_NUMBER(#{startPost})
+		ORDER BY X.FWLBNO DESC
+		]]>
 	</select>
-	
+
 	<insert id="FWLBCMInsert" parameterType="fwlbDto">
-	INSERT INTO FWLBCM VALUES(#{fwlbNo}, FWLBCMNO_SEQ.NEXTVAL, #{fwlbcmWriter}, #{fwlbcmCont}, SYSDATE)
+		INSERT INTO FWLBCM VALUES(#{fwlbNo}, FWLBCMNO_SEQ.NEXTVAL, #{fwlbcmWriter}, #{fwlbcmCont}, SYSDATE)
 	</insert>
-	
+
 	<delete id="FWLBCMDelete" parameterType="int">
-	DELETE FROM FWLBCM WHERE FWLBCMNO=#{fwlbcmNo}
+		DELETE FROM FWLBCM WHERE FWLBCMNO=#{fwlbcmNo}
 	</delete>
-	
+
 	<update id="FWLBUpdateReadCount" parameterType="int">
-	UPDATE FWLB SET FWLBREADCNT = FWLBREADCNT + 1 WHERE FWLBNO=#{fwlbNo}
+		UPDATE FWLB SET FWLBREADCNT = FWLBREADCNT + 1 WHERE FWLBNO=#{fwlbNo}
 	</update>
-	
+
 	<delete id="FWLBDelete" parameterType="int">
-	DELETE FROM FWLB WHERE FWLBNO=#{fwlbNo}
+		DELETE FROM FWLB WHERE FWLBNO=#{fwlbNo}
 	</delete>
 
 	<delete id="FWLBDeleteAll" parameterType="String">
-	DELETE FROM FWLB WHERE FWLBWRITER=#{fwlbWriter}
+		DELETE FROM FWLB WHERE FWLBWRITER=#{fwlbWriter}
 	</delete>
 </mapper>

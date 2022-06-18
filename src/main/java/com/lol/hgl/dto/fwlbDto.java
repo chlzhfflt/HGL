@@ -19,7 +19,7 @@ public class fwlbDto {
 		this.fwlbWriter = fwlbWriter;
 		this.fwlbNo = fwlbNo;
 	}
-	
+
 	public fwlbDto(String fwlbWriter, String fwlbTitle) {
 		this.fwlbWriter = fwlbWriter;
 		this.fwlbTitle = fwlbTitle;
